@@ -1,6 +1,7 @@
 package quik
 
 import (
+  "context"
   "errors"
 
   "go.mongodb.org/mongo-driver/bson/primitive"
@@ -17,6 +18,7 @@ type User struct {
   Profile      Profile            `json:"profile,omitempty" bson:"profile,omitempty"`
   Applications []string           `json:"applications,omitempty" bson:"applications,omitempty"` // holds the id's of applications
   SavedJobs    []string           `json:"saved_jobs,omitempty" bson:"saved_jobs,omitempty"`     // holds the id's of jobs that they want to come back to later
+  Secret       string             // this is the string they will post to their github profile to confirm that the account is theirs?
 }
 
 type UserService interface {
