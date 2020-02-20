@@ -1,4 +1,4 @@
-package main
+package quik
 
 import (
   "errors"
@@ -17,6 +17,13 @@ type User struct {
   Profile      Profile            `json:"profile,omitempty" bson:"profile,omitempty"`
   Applications []string           `json:"applications,omitempty" bson:"applications,omitempty"` // holds the id's of applications
   SavedJobs    []string           `json:"saved_jobs,omitempty" bson:"saved_jobs,omitempty"`     // holds the id's of jobs that they want to come back to later
+}
+
+type UserService interface {
+  CreateUser(ctx context.Context, user *User) error
+  UpsertUser(ctx context.Context, user *User) error
+  FindUserByID(ctx context.Context, id int) (*User, error)
+  FindUserByJobSearch(ctx context.Context, status int) (*User, error)
 }
 
 type Profile struct {

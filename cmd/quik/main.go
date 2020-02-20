@@ -4,6 +4,7 @@ import (
   "fmt"
   "os"
 
+  "github.com/ckbball/quik"
   "github.com/ckbball/quik/db"
   "github.com/ckbball/quik/handler"
   "github.com/ckbball/quik/router"
