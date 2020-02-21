@@ -1,0 +1,20 @@
+version: '3'
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8000:8000"
+    restart: unless-stopped
+    networks:
+      - default
+    environment:
+      HTTP_PORT: 8000
+      MONGO_URI: 
+      MONGO_NAME: dev-user
+      MONGO_COLLECTION: users
+      LOG_LEVEL: -1
+      LOG_TIME: 2006-01-02T15:04:05Z07:00
+
+      
