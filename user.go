@@ -24,33 +24,38 @@ type User struct {
 type UserService interface {
   CreateUser(ctx context.Context, user *User) error
   UpsertUser(ctx context.Context, user *User) error
-  FindUserByID(ctx context.Context, id int) (*User, error)
-  FindUserByJobSearch(ctx context.Context, status int) (*User, error)
+  GetByID(ctx context.Context, id int) (*User, error)
+  GetByEmail(ctx context.Context, id int) (*User, error)
+  GetByJobStatus(ctx context.Context, status int) (*User, error)
+  // AddApplication
+  // AddListing
+  // RemoveApplication
+  // RemoveListing
 }
 
 type Profile struct {
-  Skills      []Skill
-  WorkHistory []Work
-  Projects    []Project
+  Skills      []Skill   `json:"skills,omitempty" bson:"skills,omitempty"`
+  WorkHistory []Work    `json:"work_history,omitempty" bson:"work_history,omitempty"`
+  Projects    []Project `json:"projects,omitempty" bson:"projects,omitempty"`
 }
 
 type Skill struct {
-  SkillName       string
-  ExperienceLevel string // determined by how many projects you have used it on
+  SkillName       string `json:"skill_name,omitempty" bson:"skill_name,omitempty"`
+  ExperienceLevel string `json:"experience_level,omitempty" bson:"experience_level,omitempty"` // determined by how many projects you have used it on
 }
 
 type Work struct {
-  CompanyName  string
-  BulletPoints []string
-  Length       int // in months
+  CompanyName  string   `json:"company_name,omitempty" bson:"company_name,omitempty"`
+  BulletPoints []string `json:"bullet_points,omitempty" bson:"bullet_points,omitempty"`
+  Length       int      `json:"length,omitempty" bson:"length,omitempty"` // in months
 }
 
 type Project struct {
-  ProjectName string
-  Details     string
-  TechUsed    []string
-  LiveLink    string
-  GitLink     string
+  ProjectName string   `json:"project_name,omitempty" bson:"project_name,omitempty"`
+  Details     string   `json:"details,omitempty" bson:"details,omitempty"`
+  Tech        []string `json:"tech,omitempty" bson:"tech,omitempty"`
+  LiveLink    string   `json:"live_link,omitempty" bson:"live_link,omitempty"`
+  GitLink     string   `json:"git_link,omitempty" bson:"git_link,omitempty"`
 }
 
 func (u *User) HashPassword(pass string) (string, error) {
